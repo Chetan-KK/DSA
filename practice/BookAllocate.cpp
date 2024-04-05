@@ -12,6 +12,10 @@ int getTotal(vector<int> arr)
     return total;
 }
 
+bool isPossible(vector<int> arr, int m, int mid)
+{
+}
+
 int allocateBooks(vector<int> arr, int studs)
 {
 
@@ -24,7 +28,7 @@ int allocateBooks(vector<int> arr, int studs)
 
     while (start <= end)
     {
-        if (isPossible())
+        if (isPossible(arr, studs, mid))
         {
             ans = mid;
             end = mid - 1;
@@ -33,7 +37,9 @@ int allocateBooks(vector<int> arr, int studs)
         {
             start = mid + 1;
         }
+        mid = start + (end - start) / 2;
     }
+    return ans;
 }
 
 int main()
