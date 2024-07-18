@@ -5,24 +5,36 @@ int binarySearch(int arr[], int size, int find)
 {
 
     int start = 0;
-    int end = size - 1;
-    int mid = (start + end) / 2;
+    int end = size;
+    int mid = ((end - start) / 2) + start;
 
     while (start <= end)
     {
         if (arr[mid] == find)
         {
-            return mid;
+            int first = mid;
+            if (arr[first - 1] == arr[mid])
+            {
+                while (arr[first] == arr[mid])
+                {
+                    first--;
+                }
+            }
+
+            return first;
         }
-        else if (find < arr[mid])
-        {
-            end = mid - 1;
-        }
-        else
+
+        if (find > arr[mid])
         {
             start = mid + 1;
         }
-        mid = (start + end) / 2;
+
+        if (find < arr[mid])
+        {
+            end = mid - 1;
+        }
+
+        mid = ((end - start) / 2) + start;
     }
 
     return -1;
@@ -30,10 +42,10 @@ int binarySearch(int arr[], int size, int find)
 
 int main()
 {
-    int size = 10;
-    int arr[10] = {2, 3, 6, 9, 10, 32, 45, 86, 91, 100};
+    int size = 2;
+    int arr[2] = {5, 20};
 
-    int find = 30;
+    int find = 5;
     cout << binarySearch(arr, size, find);
 
     return 0;
