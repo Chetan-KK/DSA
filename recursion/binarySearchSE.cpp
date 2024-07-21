@@ -11,27 +11,29 @@ void printArr(int arr[], int n)
     cout << endl;
 }
 
-int binarySearch(int arr[], int size, int find)
+int binarySearch(int arr[], int size, int start, int end, int find)
 {
-
-    int start = 0;
-    int end = size;
+    // base case
+    if (start > end)
+    {
+        return -1;
+    }
 
     int mid = start + ((end - start) / 2);
 
-    // base case
-    cout << "mid: " << mid << " start: " << start << " end: " << end << " arr[mid]: " << arr[mid] << endl;
     if (arr[mid] == find)
     {
         return mid;
     }
+
     else if (find < arr[mid])
     {
-        binarySearch(arr, size - mid, find);
+        return binarySearch(arr, size, start, mid - 1, find);
     }
-    else if (find > arr[mid])
+    else
     {
-        binarySearch(arr - mid, size - mid, find);
+
+        return binarySearch(arr, size, mid + 1, end, find);
     }
 }
 
@@ -41,8 +43,13 @@ int main()
 
     int arr[6] = {10, 20, 30, 40, 60, 80};
 
-    cout << binarySearch(arr, 6, 60);
-    printArr(arr, 3);
+    int num = 0;
+
+    cout << "array: ";
+    printArr(arr, 6);
+    cout << "enter element to find: ";
+    cin >> num;
+    cout << binarySearch(arr, 6, 0, 5, num);
 
     return 0;
 }
